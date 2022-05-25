@@ -1,5 +1,7 @@
 # This script checks the price changes for Tesla for the two preceeding days and informs the user of possible reasons for the changes.
+# It uses two end points to achieve this
 # This is done by sending the user a text with the most recent news updates.
+# All sensitive fields have been removed
 
 
 
@@ -9,11 +11,11 @@ import datetime as dt
 
 STOCK_NAME = "TSLA"
 COMPANY_NAME = "Tesla Inc"
-STOCK_API_KEY = 'G7UY95P2E4APDTND'
-TESLA_API_KEY = '6bbecdacd8644803b45b1a6332784ca7'
+STOCK_API_KEY = ''
+TESLA_API_KEY = '' 
 CLOSING_TIME= '20:00:00'
-account_sid = 'ACe659fce399f3b8bdcd9c8e74ec3d6d96'
-auth_token='112b2fba7a2452adff349a0aee428a7b'
+account_sid = ''
+auth_token=''
 
 
 STOCK_ENDPOINT = "https://www.alphavantage.co/query"
@@ -123,8 +125,8 @@ if price_percentage> 1 :
 #TODO 8. - Send first article as a  message via Twilio.
     client = Client(account_sid, auth_token)
     message = client.api.account.messages.create(
-        to="+19052594172",
-        from_="+15182409532",
+        to="",
+        from_="",
         body=formatted_news_list[0])
 
 print(message.status)
