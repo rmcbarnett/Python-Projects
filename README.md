@@ -1,5 +1,5 @@
 # Python-Projects
-This repository showcases all the different python projects I've built 
+This repository showcases all the different python projects I've built. 
 
 I"m a former C# developer with over 10 years experience in coding for windows and web applications. 
 Since 2020, I've been fortunate to be coding exclusivley in Python. Ive decided to take my learning deeper with Python and ensure I'm doing things in a Pythonic way :)
