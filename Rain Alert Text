@@ -1,0 +1,55 @@
+# This script checks your latitude and longitude, then uses that informaton to check for the day's weather/
+# If its going to be raining in the next 12 hours, it helpfully sends you a text :) 
+
+import requests
+from twilio.rest import Client
+
+api_key = ""
+angela_api_key = ''
+account_sid = ''
+auth_token=''
+
+
+
+MY_LAT = 21.5463#51.507351 # Your latitude
+MY_LONG =70.3183 #-0.127758 # Your longitude
+
+OKC_LAT = 35.416213
+OKC_LONG=-97.469362
+
+
+parameters = {
+    "lat":OKC_LAT,
+    "lon":OKC_LONG,
+    "appid":api_key,
+    "exclude":'current,minutely,daily'
+}
+
+
+
+response = requests.get('https://api.openweathermap.org/data/2.5/onecall', params = parameters)
+response.raise_for_status()
+
+weather_data = response.json()
+print(weather_data['hourly'])
+print(weather_data['hourly'][0]['weather'][0]["id"])
+weather_slice = weather_data["hourly"][:12]
+print(weather_slice)
+rainy = False
+for hour_data in weather_slice:
+    if hour_data['weather'][0]["id"] <= 700:
+        print(hour_data['weather'][0]["id"])
+        rainy = True
+
+
+
+if rainy:
+    client = Client(account_sid, auth_token)
+    message = client.api.account.messages.create(
+        to="+XXXXXXX",
+        from_="XXXXXXXX",
+        body="Bring an umbrellla its raining")
+
+    print(message.status)
+
+
