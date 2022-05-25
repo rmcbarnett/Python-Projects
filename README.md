@@ -10,11 +10,9 @@ Some projects will be very basic as opposed to what I do for programming for the
 "this repository is comprised of the following mini projects:
 
 Birthday Greetings 
-This script does this that and the next displaying this and that feature...
 
 Coffee Machine SIm 
-This script does ..... 
 
-Flash Card..."
+Flash Card
 
 
