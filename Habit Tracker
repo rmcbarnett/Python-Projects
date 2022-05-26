@@ -1,0 +1,72 @@
+
+
+import requests
+from datetime import datetime
+
+TOKEN = 'Thisisnotadrill'
+USERNAME = 'rmcbarnett'
+
+
+pixela_endpoint = "https://pixe.la/v1/users"
+
+
+
+user_parameters = {
+    'token':TOKEN,
+    'username':'rmcbarnett',
+    'agreeTermsOfService':'yes',
+    'notMinor':'yes'
+
+
+}
+# User created once
+response = requests.post(url = pixela_endpoint, json=user_parameters)
+print(response.text)
+
+graph_endpoint= 'https://pixe.la/v1/users/rmcbarnett/graphs'
+graph_parameters = { 'id':'graph1',
+                     'name':'Walking Graph',
+                     'unit':'km',
+                     'type':'int',
+                     'color':'sora'
+                     }
+
+
+headers = {
+    "X-USER-TOKEN":TOKEN
+
+
+}
+# graph created once
+# response = requests.post(url = graph_endpoint, json=graph_parameters,headers=headers)
+# print(response.text)
+
+
+
+todays = datetime.now()
+todays = datetime(year =2022, month = 3, day = 15)
+
+
+pixel_endpoint = f'https://pixe.la/v1/users/{USERNAME}/graphs/graph1'
+pixel_data = {
+    'date': todays.strftime('%Y%m%d'),
+    'quantity': str(input("how many km did you cycle?"))
+   }
+
+response = requests.post(url = pixel_endpoint, json=pixel_data, headers=headers)
+print(response.text)
+
+# CHANGING AN ENDPOINT - USE PUT
+change_pixel_endpoint = f"https://pixe.la/v1/users/{USERNAME}/graphs/graph1/{todays.strftime('%Y%m%d')}"
+
+change_pixel_data = {
+     'quantity':'3000'
+
+ }
+response = requests.put(url = change_pixel_endpoint,json=change_pixel_data, headers = headers)
+print(response.text)
+
+# # Deleting an Endpoint
+# delete_pixel_endpoint = f"https://pixe.la/v1/users/{USERNAME}/graphs/graph1/{todays.strftime('%Y%m%d')}"
+# response = requests.delete(url = delete_pixel_endpoint, headers = headers)
+# print(response.text)
