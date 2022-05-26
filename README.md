@@ -7,12 +7,16 @@ The goal is to build 100 projects in 100 days...smaller to larger...
 Some projects will be very basic as opposed to what I do for programming for the day job, but hey, fundamentals are important, right? 
 
 
-"this repository is comprised of the following mini projects:
+"this repository is comprised of the following fun mini projects:
 
 Birthday Greetings 
 
 Coffee Machine SIm 
 
 Flash Card
+
+Rain Alert
+
+Habit Tracker
 
 
