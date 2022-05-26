@@ -3,8 +3,8 @@
 import requests
 from datetime import datetime
 
-TOKEN = 'Thisisnotadrill'
-USERNAME = 'rmcbarnett'
+TOKEN = ''
+USERNAME = ''
 
 
 pixela_endpoint = "https://pixe.la/v1/users"
@@ -23,7 +23,7 @@ user_parameters = {
 response = requests.post(url = pixela_endpoint, json=user_parameters)
 print(response.text)
 
-graph_endpoint= 'https://pixe.la/v1/users/rmcbarnett/graphs'
+graph_endpoint= 'https://pixe.la/v1/users/xxxxxx/graphs'
 graph_parameters = { 'id':'graph1',
                      'name':'Walking Graph',
                      'unit':'km',
