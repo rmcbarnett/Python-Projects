@@ -1,0 +1,59 @@
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+import time
+import random
+
+service = Service("C:\development\chromedriver.exe")
+driver = webdriver.Chrome(service=service)
+driver.get('http://orteil.dashnet.org/experiments/cookie/')
+
+
+
+def check_for_upgrade(upgrades, clicks):
+    return_upgrade = None
+
+    for upgrade in upgrades:
+        if int(upgrades[upgrade]['price']) < clicks:
+
+            return_upgrade = upgrades[upgrade]['ID']
+    return return_upgrade
+
+Cookie = driver.find_element(By.ID, 'cookie')
+upgrades = driver.find_elements(By.CSS_SELECTOR, '.grayed')
+
+upgrades = upgrades[:-1]
+print(type(upgrades))
+upgrade_dict = {}
+count = 0
+
+for upgrade in upgrades:
+    count+=1
+
+    price = upgrade.find_element(By.TAG_NAME,'b')
+    price = price.text.split('-')[1].strip().replace(',','')
+    upgrade_dict[count] = {}
+    upgrade_dict[count]['price'] = price
+    upgrade_dict[count]['element'] = upgrade
+    upgrade_dict[count]['ID'] = upgrade.get_attribute("id")
+
+timeout_5sec = time.time() +1
+timeout = time.time() + 60*5  # 1 minutes from now
+clicks = 0
+print(upgrade_dict)
+while True:
+    Cookie.click()
+
+    if time.time() > timeout_5sec:
+        clicks = int(driver.find_element(By.ID,'money').text)
+        upgrade_to_click = check_for_upgrade(upgrade_dict,clicks)
+        if upgrade_to_click is not None:
+
+           div_to_click = driver.find_element(By.ID,upgrade_to_click.strip())
+           div_to_click.click()
+
+        timeout_5sec = time.time() +random.randint(1,10)
+    if time.time() > timeout:
+        print(driver.find_element(By.ID,'money').text)
+        break
+
